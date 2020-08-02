@@ -5,28 +5,38 @@ import salesAnalysis.models.Customer;
 import salesAnalysis.models.Sale;
 import salesAnalysis.models.Seller;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Report {
+public class Report implements Serializable {
     private static final int ROW_ID_INDEX = 0;
+    private String filename;
 
-    private Map<String, Function> mapper = new HashMap<>();
     private List<Seller> sellers;
     private List<Customer> customers;
     private List<Sale> sales;
 
-    public Report() {
-        this.sellers = new ArrayList<>();
-        this.customers = new ArrayList<>();
-        this.sales = new ArrayList<>();
-        initMapper();
+    public Report(String filename) {
+        sellers = new ArrayList<>();
+        customers = new ArrayList<>();
+        sales = new ArrayList<>();
+        this.filename = getOnlyName(filename);
     }
 
     public void addEntry(CSVRecord row) {
-        mapper.get(row.get(ROW_ID_INDEX)).apply(row);
+        switch (row.get(ROW_ID_INDEX)) {
+            case "001":
+                sellers.add(new Seller(row));
+                break;
+            case "002":
+                customers.add(new Customer(row));
+                break;
+            case "003":
+                sales.add(new Sale(row, sellers));
+                break;
+        }
     }
 
     public Seller getWorstSeller() {
@@ -36,6 +46,10 @@ public class Report {
                 .min((entry1, entry2) -> compareSellerSales(entry1, entry2))
                 .get()
                 .getKey();
+    }
+
+    public String getFilename() {
+        return filename;
     }
 
     public Integer getMostExpensiveSaleId() {
@@ -58,12 +72,6 @@ public class Report {
         return sales;
     }
 
-    private void initMapper() {
-        mapper.put("001", (Function) (row) -> sellers.add(new Seller((CSVRecord) row)));
-        mapper.put("002", (Function) (row) -> customers.add(new Customer((CSVRecord) row)));
-        mapper.put("003", (Function) (row) -> sales.add(new Sale((CSVRecord) row, sellers)));
-    }
-
     private Map<Seller, List<Sale>> groupSaleBySeller() {
         return sales.stream().collect(Collectors.groupingBy(Sale::getSeller));
     }
@@ -74,5 +82,11 @@ public class Report {
 
     private BigDecimal getTotalSoldFrom(List<Sale> sales) {
         return sales.stream().map(Sale::getTotalSold).reduce(BigDecimal::add).get();
+    }
+
+    private String getOnlyName(String path) {
+        String[] splittedPath = path.split("/");
+
+        return splittedPath[splittedPath.length - 1];
     }
 }
