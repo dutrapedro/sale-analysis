@@ -1,6 +1,5 @@
 package salesAnalysis.transforms;
 
-import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.FileIO;
 import org.apache.beam.sdk.testing.PAssert;
 import org.apache.beam.sdk.testing.TestPipeline;
@@ -10,10 +9,8 @@ import org.apache.beam.sdk.values.PCollection;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import salesAnalysis.Report;
 import salesAnalysis.TestUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 

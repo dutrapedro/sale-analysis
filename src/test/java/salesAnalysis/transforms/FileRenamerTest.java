@@ -3,13 +3,11 @@ package salesAnalysis.transforms;
 import org.apache.beam.sdk.io.FileIO;
 import org.apache.beam.sdk.testing.TestPipeline;
 import org.apache.beam.sdk.transforms.MapElements;
-import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.PCollection;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import salesAnalysis.Report;
 
 import java.io.File;
 

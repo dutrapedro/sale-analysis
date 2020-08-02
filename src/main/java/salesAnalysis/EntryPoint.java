@@ -3,7 +3,6 @@ package salesAnalysis;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.FileIO;
 import org.apache.beam.sdk.transforms.MapElements;
-import org.apache.beam.sdk.transforms.ParDo;
 import org.joda.time.Duration;
 import salesAnalysis.transforms.CSVGenerator;
 import salesAnalysis.transforms.ContentParser;
