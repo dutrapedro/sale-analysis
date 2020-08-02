@@ -29,7 +29,7 @@ public class EntryPoint {
                         .into(kvs(strings(), strings()))
                         .via(FileInformation::get))
                 .apply("Parse Content", MapElements.via(new ContentParser()))
-                .apply("Generate CSV Report", MapElements.via(new CSVGenerator(null)))
+                .apply("Generate CSV Report", MapElements.via(new CSVGenerator("")))
                 .apply("Rename original file", MapElements.via(new FileRenamer(path)));
 
         pipeline.run();
