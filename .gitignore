@@ -1,6 +1,7 @@
 .gradle
 /build/
 .idea/
+src/test/data/out
 
 # Ignore Gradle GUI config
 gradle-app.setting
