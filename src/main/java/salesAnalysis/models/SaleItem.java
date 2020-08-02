@@ -1,9 +1,9 @@
 package salesAnalysis.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
-public class SaleItem {
+public class SaleItem implements Serializable {
     private static final int QUANTITY = 1;
     private static final int PRICE = 2;
 

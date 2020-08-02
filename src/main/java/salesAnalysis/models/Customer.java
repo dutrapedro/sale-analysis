@@ -2,7 +2,9 @@ package salesAnalysis.models;
 
 import org.apache.commons.csv.CSVRecord;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private static final int CNPJ = 1;
     private static final int NAME = 2;
     private static final int BUSINESS_AREA = 3;

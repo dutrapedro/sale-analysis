@@ -2,12 +2,13 @@ package salesAnalysis.models;
 
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Sale {
+public class Sale implements Serializable {
     private static final int SALE_ID = 1;
     private static final int ITEMS = 2;
     private static final int SELLER = 3;
