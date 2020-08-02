@@ -1,7 +1,5 @@
 package salesAnalysis;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Test;
 
@@ -13,8 +11,8 @@ import static junit.framework.TestCase.assertEquals;
 public class ReportTest {
     @Test
     public void assertsThatWorstSellerIsCorrect() throws IOException {
-        Report report = new Report();
-        List<CSVRecord> rows = TestHelper.getCsvRecords();
+        Report report = new Report("/home/test/test.csv");
+        List<CSVRecord> rows = TestUtils.getCsvRecords();
         rows.stream().forEach( row -> report.addEntry(row));
 
         assertEquals("Paulo", report.getWorstSeller().getName());
@@ -22,8 +20,8 @@ public class ReportTest {
 
     @Test
     public void assertsThatMostExpensiveSaleIdIsCorrect() throws IOException{
-        Report report = new Report();
-        List<CSVRecord> rows = TestHelper.getCsvRecords();
+        Report report = new Report("/home/test/test.csv");
+        List<CSVRecord> rows = TestUtils.getCsvRecords();
         rows.stream().forEach( row -> report.addEntry(row));
 
         assertEquals("10", report.getMostExpensiveSaleId().toString());
@@ -31,12 +29,12 @@ public class ReportTest {
 
     @Test
     public void assertsThatAddEntryAddDataToCorrectCollection() throws IOException {
-        Report report = new Report();
-        List<CSVRecord> rows = TestHelper.getCsvRecords();
+        Report report = new Report("/home/test/test.csv");
+        List<CSVRecord> rows = TestUtils.getCsvRecords();
 
-        report.addEntry(rows.get(TestHelper.SELLER_ROW_INDEX));
-        report.addEntry(rows.get(TestHelper.CUSTOMER_ROW_INDEX));
-        report.addEntry(rows.get(TestHelper.SALE_ROW_INDEX));
+        report.addEntry(rows.get(TestUtils.SELLER_ROW_INDEX));
+        report.addEntry(rows.get(TestUtils.CUSTOMER_ROW_INDEX));
+        report.addEntry(rows.get(TestUtils.SALE_ROW_INDEX));
 
         assertEquals(1, report.getSellers().size());
         assertEquals(1, report.getCustomers().size());

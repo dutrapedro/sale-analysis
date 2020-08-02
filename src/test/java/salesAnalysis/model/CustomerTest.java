@@ -2,7 +2,7 @@ package salesAnalysis.model;
 
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Test;
-import salesAnalysis.TestHelper;
+import salesAnalysis.TestUtils;
 import salesAnalysis.models.Customer;
 
 import java.io.IOException;
@@ -13,9 +13,9 @@ import static junit.framework.TestCase.assertEquals;
 public class CustomerTest {
     @Test
     public void assertsThatCustomerIsCreatedCorrectly() throws IOException {
-        List<CSVRecord> rows = TestHelper.getCsvRecords();
+        List<CSVRecord> rows = TestUtils.getCsvRecords();
 
-        Customer customer = new Customer(rows.get(TestHelper.CUSTOMER_ROW_INDEX));
+        Customer customer = new Customer(rows.get(TestUtils.CUSTOMER_ROW_INDEX));
 
         assertEquals("2345675434544345", customer.getCnpj());
         assertEquals("Jose da Silva", customer.getName());
